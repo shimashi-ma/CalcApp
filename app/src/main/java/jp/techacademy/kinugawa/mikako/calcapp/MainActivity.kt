@@ -1,6 +1,7 @@
 package jp.techacademy.kinugawa.mikako.calcapp
 
 import android.support.v7.app.AppCompatActivity
+import android.support.design.widget.Snackbar
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,8 +27,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val sum1 = editText1.text.toString()
         val sum2 = editText2.text.toString()
 
+        if (sum1 == "" || sum2 == "" || sum1 =="." || sum2 == "." || sum1 =="-" || sum2 == "-" ) {
+            Snackbar.make(v, "何か数値を入力してください", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+             return
+        }
+
         val number1 = sum1.toDouble()
         val number2 = sum2.toDouble()
+
 
         var answer: Double = 1.0
 
@@ -41,19 +49,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             answer = number1 * number2
 
         } else if (v.id == R.id.button4) {
+            if (number1 == 0.0) {
+                Snackbar.make(v, "0以外の数値を入力してください", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+                return
+            }
             answer = number1 / number2
         }
 
-        if (sum1 == "" || sum2 == "") {
-            fab.setOnClickListener { view ->
-                Snackbar.make(view, "何か数値を入力してください", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Action"){
-                            Log.d("UI_PARTS", "Snackbarをタップした")
-                        }.show()
-            }
-
-        }
-1
         Log.d("UI_PARTS", "${answer}")
         intent.putExtra("VALUE1", answer)
 
