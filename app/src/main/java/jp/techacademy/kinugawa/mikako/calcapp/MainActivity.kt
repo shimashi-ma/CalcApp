@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             answer = number1 * number2
 
         } else if (v.id == R.id.button4) {
-            if (number1 == 0.0) {
+            if (number2 == 0.0) {
                 Snackbar.make(v, "0以外の数値を入力してください", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 return
